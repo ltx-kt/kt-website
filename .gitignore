@@ -21,3 +21,5 @@ src/content/_assets/
 # OS
 .DS_Store
 Thumbs.db
+
+.vercel
