@@ -1,0 +1,18 @@
+---
+import TerminalFrame from '../layouts/TerminalFrame.astro';
+---
+<TerminalFrame title="404 — KT's Website">
+  <section
+    id="home"
+    style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1.5rem;text-align:center;padding:2rem;"
+  >
+    <pre style="color:var(--accent-a);font-family:'JetBrains Mono',monospace;font-size:clamp(3rem,10vw,6rem);font-weight:700;line-height:1;margin:0;">404</pre>
+    <p style="color:var(--fg-muted,#888);font-family:'JetBrains Mono',monospace;font-size:0.9rem;margin:0;">
+      File not found.
+    </p>
+    <a
+      href="/"
+      style="color:var(--accent-a);font-family:'JetBrains Mono',monospace;font-size:0.9rem;text-decoration:none;"
+    >← cd ~</a>
+  </section>
+</TerminalFrame>

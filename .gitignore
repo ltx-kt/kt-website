@@ -1,0 +1,23 @@
+# Astro
+node_modules/
+dist/
+.astro/
+
+# Personal content — keep code public, data private
+src/content/experience/
+src/content/projects/
+src/content/education/
+src/content/profile/
+src/content/social/
+src/content/skills/
+src/content/_assets/
+
+# Design-time artifacts — full chat transcripts, prototype components, reference screenshots
+.design-temp/
+
+# Claude Code session data
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

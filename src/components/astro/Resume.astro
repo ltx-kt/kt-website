@@ -1,0 +1,77 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+const profile = (await getEntry('profile', 'me')).data;
+const social  = (await getEntry('social', 'me')).data;
+const { groups: skillGroups } = (await getEntry('skills', 'me')).data;
+
+const rawJobs = await getCollection('experience');
+const jobs = rawJobs
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(j => j.data);
+
+const rawEducation = await getCollection('education');
+const education = rawEducation
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(e => e.data);
+
+const skillsFlat = skillGroups.flatMap(g => g.items).join(', ');
+---
+<section id="resume" class="section resume">
+  <div class="section-head" data-animate>
+    <span class="section-label">06 — RESUME</span>
+    <h2 class="section-title" data-accent="b">
+      The <span class="pill-outline-sm" data-accent="b">one-pager</span>
+    </h2>
+  </div>
+
+  <div class="resume-sheet" data-animate>
+    <header class="rs-head">
+      <div>
+        <h3 class="rs-name">{profile.name}</h3>
+        <p class="rs-title">{profile.title}</p>
+      </div>
+      <div class="rs-contact">
+        <span>{social.github.display}</span>
+        <span>{social.linkedin.display}</span>
+      </div>
+    </header>
+
+    <div class="rs-section">
+      <h4 class="rs-h">Summary</h4>
+      <p>{profile.resumeSummary}</p>
+    </div>
+
+    <div class="rs-section">
+      <h4 class="rs-h">Experience</h4>
+      {jobs.map(j => (
+        <div class="rs-job">
+          <div class="rs-job-head">
+            <strong>{j.role}</strong>
+            <span>{j.company} · {j.years}</span>
+          </div>
+          <ul>
+            {j.details.map(d => <li>{d}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="rs-row">
+      <div class="rs-section">
+        <h4 class="rs-h">Education</h4>
+        {education.map(e => (
+          <p>
+            <strong>{e.degree}</strong><br />
+            {e.school} · {e.years}
+            {e.detail && <><br />{e.detail}</>}
+          </p>
+        ))}
+      </div>
+      <div class="rs-section">
+        <h4 class="rs-h">Skills</h4>
+        <p>{skillsFlat}.</p>
+      </div>
+    </div>
+  </div>
+</section>

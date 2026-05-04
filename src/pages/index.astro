@@ -1,0 +1,38 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import TerminalFrame from '../layouts/TerminalFrame.astro';
+import TypewriterHero from '../components/react/TypewriterHero';
+import ExperienceTimeline from '../components/react/ExperienceTimeline';
+import ProjectsGrid from '../components/react/ProjectsGrid';
+import CustomCursor from '../components/react/CustomCursor';
+import About from '../components/astro/About.astro';
+import Skills from '../components/astro/Skills.astro';
+import Education from '../components/astro/Education.astro';
+import Resume from '../components/astro/Resume.astro';
+import Contact from '../components/astro/Contact.astro';
+
+const rawJobs = await getCollection('experience');
+const jobs = rawJobs
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(j => j.data);
+
+const rawProjects = await getCollection('projects');
+const projects = rawProjects
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(p => p.data);
+
+const phrases = ["kt's portfolio", "kt's AI slop", "lol", "open_to_work :)"];
+const social = (await getEntry('social', 'me')).data;
+const profile = (await getEntry('profile', 'me')).data;
+---
+<TerminalFrame>
+  <CustomCursor client:idle />
+  <TypewriterHero phrases={phrases} social={social} heroGreeting={profile.heroGreeting} client:load />
+  <About />
+  <ExperienceTimeline jobs={jobs} client:visible />
+  <ProjectsGrid projects={projects} client:visible />
+  <Skills />
+  <Education />
+  <Resume />
+  <Contact />
+</TerminalFrame>

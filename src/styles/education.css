@@ -1,0 +1,31 @@
+.edu-list { display: flex; flex-direction: column; gap: 14px; }
+.edu-item {
+  display: grid;
+  grid-template-columns: 160px 1fr 14px;
+  gap: 24px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.edu-item:last-child { border-bottom: 0; }
+.edu-years { font-family: var(--mono); font-size: 13px; font-weight: 600; padding-top: 4px; }
+.edu-degree { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+.edu-school { color: var(--fg-2); margin: 0 0 6px; font-size: 14px; }
+.edu-detail { color: var(--fg-3); margin: 0; font-size: 13.5px; }
+.edu-marker { width: 14px; height: 14px; border-radius: 50%; margin-top: 8px; }
+
+@media (max-width: 720px) {
+  .edu-item {
+    grid-template-columns: 1fr 14px;
+    gap: 8px 16px;
+    padding: 20px 0;
+  }
+  .edu-years {
+    grid-column: 1 / -1;
+    padding-top: 0;
+    font-size: 12px;
+  }
+  .edu-body { grid-column: 1; }
+  .edu-marker { grid-column: 2; margin-top: 4px; }
+  .edu-degree { font-size: clamp(18px, 5vw, 22px); }
+}

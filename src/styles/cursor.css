@@ -1,0 +1,23 @@
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #fff;
+  transition: width 0.15s ease, height 0.15s ease;
+}
+.cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+}
+.cursor-ring.hover {
+  width: 56px; height: 56px;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+@media (max-width: 720px) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+}

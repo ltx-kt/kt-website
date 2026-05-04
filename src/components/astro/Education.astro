@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+
+const raw = await getCollection('education');
+const items = raw.sort((a, b) => a.data.order - b.data.order).map(e => e.data);
+---
+<section id="education" class="section education">
+  <div class="section-head" data-animate>
+    <span class="section-label">05 — EDUCATION</span>
+    <h2 class="section-title" data-accent="a">
+      Academic <span class="pill-outline-sm" data-accent="a">background</span>
+    </h2>
+  </div>
+  <div class="edu-list" data-animate-stagger>
+    {items.map((e, i) => (
+      <div class="edu-item">
+        <span class="edu-years">{e.years}</span>
+        <div class="edu-body">
+          <h4 class="edu-degree">{e.degree}</h4>
+          <p class="edu-school">{e.school}</p>
+          {e.detail && <p class="edu-detail">{e.detail}</p>}
+        </div>
+        <span
+          class="edu-marker"
+          style={`background: ${i % 2 === 0 ? 'var(--accent-a)' : 'var(--accent-b)'}`}
+        ></span>
+      </div>
+    ))}
+  </div>
+</section>

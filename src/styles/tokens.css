@@ -1,0 +1,32 @@
+:root {
+  --bg: #f4f4f1;
+  --bg-2: #ebebe7;
+  --fg: #0e0e10;
+  --fg-2: #555558;
+  --fg-3: #8a8a8d;
+  --line: rgba(14, 14, 16, 0.14);
+  --line-strong: rgba(14, 14, 16, 0.7);
+  --card: #ffffff;
+  --accent-a: #9e293a;
+  --accent-b: #624870;
+  --display: 'Chakra Petch', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --pad: clamp(20px, 4vw, 64px);
+  --gap: clamp(24px, 4vw, 56px);
+  --radius-pill: 999px;
+}
+
+[data-theme="dark"] {
+  --bg: #0e0e10;
+  --bg-2: #18181b;
+  --fg: #f4f4f1;
+  --fg-2: #c4c4c7;
+  --fg-3: #88888c;
+  --line: rgba(244, 244, 241, 0.14);
+  --line-strong: rgba(244, 244, 241, 0.85);
+  --card: #18181b;
+}
+
+[data-density="compact"] { --pad: clamp(14px, 2.5vw, 40px); --gap: clamp(16px, 2.5vw, 36px); }
+[data-density="comfy"]   { --pad: clamp(28px, 5vw, 88px);   --gap: clamp(32px, 5vw, 80px); }

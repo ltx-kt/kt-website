@@ -1,0 +1,28 @@
+---
+import { getEntry } from 'astro:content';
+const { groups } = (await getEntry('skills', 'me')).data;
+---
+<section id="skills" class="section skills">
+  <div class="section-head" data-animate>
+    <span class="section-label">04 — SKILLS</span>
+    <h2 class="section-title" data-accent="b">
+      What I <span class="pill-outline-sm" data-accent="b">work with</span>
+    </h2>
+  </div>
+  <div class="skills-grid" data-animate-stagger>
+    {groups.map((g, gi) => (
+      <div class="skill-group">
+        <h4 class="skill-group-label">
+          <span
+            class="sg-marker"
+            style={`background: ${gi % 2 === 0 ? 'var(--accent-a)' : 'var(--accent-b)'}`}
+          ></span>
+          {g.label}
+        </h4>
+        <ul class="skill-list">
+          {g.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

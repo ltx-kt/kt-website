@@ -1,0 +1,68 @@
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s;
+  display: flex; flex-direction: column;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--card-accent);
+}
+.pc-thumb {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+}
+.pc-thumb-bg { position: absolute; inset: 0; opacity: 0.55; }
+.pc-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 12px);
+}
+.pc-tag {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.12em;
+  background: var(--fg); color: var(--bg);
+  padding: 4px 8px; border-radius: 4px;
+  z-index: 1;
+}
+.pc-meta {
+  position: absolute; bottom: 12px; right: 12px;
+  font-family: var(--mono); font-size: 12px;
+  background: var(--card); padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 1;
+}
+.pc-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.pc-name {
+  font-family: var(--display);
+  font-size: 24px; font-weight: 600;
+  margin: 0 0 6px;
+}
+.pc-blurb { color: var(--fg-2); font-size: 14.5px; margin: 0 0 14px; line-height: 1.5; }
+.pc-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.pc-details { overflow: hidden; transition: max-height 0.3s ease; }
+.pc-details p {
+  font-size: 13.5px; color: var(--fg-2);
+  margin: 0 0 12px; padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.pc-toggle {
+  align-self: flex-start;
+  margin-top: auto;
+  font-family: var(--mono); font-size: 12px;
+  background: transparent; border: 0; padding: 0;
+  color: var(--fg-2);
+  cursor: none;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.project-card:hover .pc-toggle { color: var(--fg); }

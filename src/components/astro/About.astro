@@ -1,0 +1,32 @@
+---
+import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import aboutPhoto from '../../content/_assets/about-photo.jpg';
+const profile = (await getEntry('profile', 'me')).data;
+---
+<section id="about" class="section about">
+  <div class="section-head" data-animate>
+    <span class="section-label">01 — ABOUT</span>
+    <h2 class="section-title" data-accent="a">
+      A little bit <span class="pill-outline-sm" data-accent="a">about me</span>
+    </h2>
+  </div>
+
+  <div class="about-grid" data-animate-stagger>
+    <div class="about-photo">
+      <div class="photo-circle">
+        <Image src={aboutPhoto} alt="Kevin Tran" width={640} height={640} />
+      </div>
+    </div>
+
+    <div class="about-body">
+      <p class="about-lead">
+        {profile.about.lead}
+      </p>
+      <div class="about-cols">
+        {profile.about.paragraphs.map(p => <p>{p}</p>)}
+      </div>
+
+    </div>
+  </div>
+</section>
