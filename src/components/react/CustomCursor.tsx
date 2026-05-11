@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 export default function CustomCursor() {
   useEffect(() => {
+    if (window.matchMedia('(hover: none)').matches) return;
     const dot = document.querySelector<HTMLElement>('.cursor-dot');
     const ring = document.querySelector<HTMLElement>('.cursor-ring');
     if (!dot || !ring) return;
