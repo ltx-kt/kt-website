@@ -56,6 +56,14 @@ const tree = [
   <div class="layout-terminal">
     <!-- Mac-style window titlebar -->
     <div class="tm-titlebar">
+      <button class="tm-sidebar-toggle" aria-label="Toggle navigation" aria-controls="tm-sidebar" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="1" y="2" width="3" height="12" rx="0.5" fill="currentColor"/>
+          <rect x="6" y="2" width="9" height="1.5" rx="0.5" fill="currentColor"/>
+          <rect x="6" y="7.25" width="9" height="1.5" rx="0.5" fill="currentColor"/>
+          <rect x="6" y="12.5" width="9" height="1.5" rx="0.5" fill="currentColor"/>
+        </svg>
+      </button>
       <span class="tm-dot red" aria-hidden="true"></span>
       <span class="tm-dot yellow" aria-hidden="true"></span>
       <span class="tm-dot green" aria-hidden="true"></span>
@@ -65,7 +73,7 @@ const tree = [
 
     <div class="tm-body">
       <!-- File-tree sidebar nav -->
-      <aside class="tm-sidebar" aria-label="File explorer">
+      <aside id="tm-sidebar" class="tm-sidebar" aria-label="File explorer">
         <div class="tm-sb-section">EXPLORER</div>
         <ul class="tm-tree" role="list">
           <li class="tm-tree-folder" aria-hidden="true">▾ portfolio/</li>
@@ -100,6 +108,8 @@ const tree = [
         <slot />
       </main>
     </div>
+
+    <div class="tm-sidebar-scrim" aria-hidden="true"></div>
 
     <!-- IDE-style status bar -->
     <div class="tm-statusbar" role="status" aria-live="polite">
@@ -195,6 +205,67 @@ const tree = [
     document
       .querySelectorAll('[data-animate], [data-animate-stagger]')
       .forEach((el) => animObs.observe(el));
+  </script>
+
+  <script>
+    // Mobile slide-in drawer for sidebar
+    const toggle = document.querySelector<HTMLButtonElement>('.tm-sidebar-toggle');
+    const sidebar = document.getElementById('tm-sidebar');
+    const scrim = document.querySelector<HTMLElement>('.tm-sidebar-scrim');
+
+    if (toggle && sidebar && scrim) {
+      const mq = window.matchMedia('(max-width: 860px)');
+
+      function openDrawer() {
+        sidebar.classList.add('is-open');
+        scrim.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        sidebar.removeAttribute('aria-hidden');
+      }
+
+      function closeDrawer() {
+        sidebar.classList.remove('is-open');
+        scrim.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        if (mq.matches) sidebar.setAttribute('aria-hidden', 'true');
+        toggle.focus();
+      }
+
+      // Initialize: hide sidebar from AT on mobile
+      if (mq.matches) sidebar.setAttribute('aria-hidden', 'true');
+
+      toggle.addEventListener('click', () => {
+        if (sidebar.classList.contains('is-open')) closeDrawer();
+        else openDrawer();
+      });
+
+      scrim.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('is-open')) closeDrawer();
+      });
+
+      // Close drawer when a nav link is tapped on mobile
+      document.querySelectorAll('.tm-tree-file').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (mq.matches && sidebar.classList.contains('is-open')) closeDrawer();
+        });
+      });
+
+      // Restore desktop state on viewport resize past breakpoint
+      mq.addEventListener('change', (e) => {
+        if (!e.matches) {
+          sidebar.classList.remove('is-open');
+          scrim.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          sidebar.removeAttribute('aria-hidden');
+        } else {
+          if (!sidebar.classList.contains('is-open')) {
+            sidebar.setAttribute('aria-hidden', 'true');
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>

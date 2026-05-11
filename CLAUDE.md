@@ -24,7 +24,7 @@ No linter or test runner is configured. TypeScript is checked implicitly during 
 | `src/components/react/` | `client:load` / `client:visible` / `client:idle` | Anything with `useState`/`useEffect` |
 
 The four React islands and their hydration strategy:
-- `TypewriterHero` — `client:load` (visible immediately)
+- `iterHero` — `client:load` (visible immediately)
 - `ExperienceTimeline` — `client:visible` (below the fold, expand/collapse interaction)
 - `ProjectsGrid` — `client:visible` (below the fold, expand/collapse interaction)
 - `CustomCursor` — `client:idle` (renders nothing; pure side-effect)

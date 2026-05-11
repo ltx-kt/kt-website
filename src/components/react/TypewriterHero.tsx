@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function TypewriterHero({ phrases, social, heroGreeting }: Props) {
+  const longest = phrases.reduce((a, b) => (b.length > a.length ? b : a), '');
   const [text, setText] = useState('');
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
@@ -42,7 +43,12 @@ export default function TypewriterHero({ phrases, social, heroGreeting }: Props)
         <span className="tm-c">{'// ~/about-me.md · last edited 4m ago'}</span>
       </div>
       <h1 className="tm-hero-title">
-        <span className="tm-prompt">$</span> {text}<span className="tm-caret">▌</span>
+        <span className="tm-tw-live">
+          <span className="tm-prompt">$</span> {text}<span className="tm-caret">▌</span>
+        </span>
+        <span className="tm-tw-phantom" aria-hidden="true">
+          <span className="tm-prompt">$</span> {longest}<span className="tm-caret">▌</span>
+        </span>
       </h1>
       <pre className="tm-hero-code">{heroGreeting.join('\n')}</pre>
       <div className="tm-hero-cta">
