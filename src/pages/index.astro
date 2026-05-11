@@ -21,7 +21,7 @@ const projects = rawProjects
   .sort((a, b) => a.data.order - b.data.order)
   .map(p => p.data);
 
-const phrases = ["kt's portfolio", "kt's AI slop", "lol", "open_to_work :)"];
+const phrases = ["kt's portfolio", "kt's AI slop", "lol", "open to work :)"];
 const social = (await getEntry('social', 'me')).data;
 const profile = (await getEntry('profile', 'me')).data;
 ---
